@@ -8,9 +8,9 @@ from vec import Vec
 
 ## Problem 1
 # Please represent your solutions as lists.
-vector_matrix_product_1 = ...
-vector_matrix_product_2 = ...
-vector_matrix_product_3 = ... 
+vector_matrix_product_1 = [1, 0]
+vector_matrix_product_2 = [0, 4.44]
+vector_matrix_product_3 = [6, 18, 36]
 
 
 
