@@ -43,7 +43,7 @@ def find_error(e):
 non_codeword = Vec({0,1,2,3,4,5,6}, {0: one, 1:0, 2:one, 3:one, 4:0, 5:one, 6:one})
 error_vector = Vec(..., ...)
 code_word = Vec(..., ...)
-original = ... # code_word * R
+original = ... # R * code_word
 
 
 ## Task 5
