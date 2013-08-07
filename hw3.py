@@ -143,17 +143,24 @@ column_row_vector_multiplication4 = Vec({0,1}, {0:30, 1:16})
 column_row_vector_multiplication5 = Vec({0, 1, 2}, {0:-3, 1:1, 2:9})
 
 
-
+import matutil 
 ## Problem 11
 def lin_comb_mat_vec_mult(M, v):
     assert(M.D[1] == v.D)
-    pass
+    vc= matutil.mat2coldict(M)
+    nvc= {c: v[c] * vc[c] for c in v.D}
+    snvc= {r: sum([nvc[c][r] for c in v.D]) for r in M.D[0]}
+    return Vec(set(snvc.keys()), snvc)
 
 
 
 ## Problem 12
 def lin_comb_vec_mat_mult(v, M):
     assert(v.D == M.D[0])
+    vc= matutil.mat2rowdict(M)
+    nvc= {c: v[c] * vc[c] for c in v.D}
+    snvc= {r: sum([nvc[c][r] for c in v.D]) for r in M.D[1]}
+    return Vec(set(snvc.keys()), snvc)
     pass
 
 
@@ -161,13 +168,18 @@ def lin_comb_vec_mat_mult(v, M):
 ## Problem 13
 def dot_product_mat_vec_mult(M, v):
     assert(M.D[1] == v.D)
-    pass
+    vm= matutil.mat2rowdict(M)
+    nvm= {r: vm[r] * v for r in vm.keys()}
+    return Vec(set(nvm.keys()),nvm)
 
 
 
 ## Problem 14
 def dot_product_vec_mat_mult(v, M):
     assert(v.D == M.D[0])
+    vm= matutil.mat2coldict(M)
+    nvm= {r: vm[r] * v for r in vm.keys()}
+    return Vec(set(nvm.keys()),nvm)
     pass
 
 
