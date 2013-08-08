@@ -187,41 +187,43 @@ def dot_product_vec_mat_mult(v, M):
 ## Problem 15
 def Mv_mat_mat_mult(A, B):
     assert A.D[1] == B.D[0]
-    pass
+    column_dict= matutil.mat2coldict(B);
+    return matutil.coldict2mat({c: A*column_dict[c] for c in B.D[1]})
 
 
 
 ## Problem 16
 def vM_mat_mat_mult(A, B):
     assert A.D[1] == B.D[0]
-    pass
-
+    row_dict= matutil.mat2rowdict(A);
+    return matutil.rowdict2mat({r:row_dict[r]*B for r in A.D[0]})
 
 
 ## Problem 17
 def dot_prod_mat_mat_mult(A, B):
     assert A.D[1] == B.D[0]
-    pass
-
+    row_dict= matutil.mat2rowdict(A)
+    col_dict= matutil.mat2coldict(B)
+    return Mat((A.D[0], B.D[1]),{(r,c):row_dict[r]*col_dict[c] for r in A.D[0] for c in B.D[1]})
 
 
 ## Problem 18
-solving_systems_x1 = ...
-solving_systems_x2 = ...
-solving_systems_y1 = ...
-solving_systems_y2 = ...
-solving_systems_m = Mat(({0, 1}, {0, 1}), {...})
-solving_systems_a = Mat(({0, 1}, {0, 1}), {...})
-solving_systems_a_times_m = Mat(({0, 1}, {0, 1}), {...})
-solving_systems_m_times_a = Mat(({0, 1}, {0, 1}), {...})
+solving_systems_x1 = -0.2
+solving_systems_x2 = 0.4
+solving_systems_y1 = 0.8
+solving_systems_y2 = -0.6
+solving_systems_m = Mat(({0, 1}, {0, 1}), {(0,0):-0.2, (1,0):0.4, (0,1):0.8, (1,1):-0.6})
+solving_systems_a = Mat(({0, 1}, {0, 1}), {(0,0):3,(1,0):2,(0,1):4,(1,1):1})
+solving_systems_a_times_m = Mat(({0, 1}, {0, 1}), {(0,0):1,(1,1):1})
+solving_systems_m_times_a = Mat(({0, 1}, {0, 1}), {(0,0):1,(1,1):1})
 
 
 
 ## Problem 19
 # Please write your solutions as booleans (True or False)
 
-are_inverses1 = ...
-are_inverses2 = ...
-are_inverses3 = ...
-are_inverses4 = ...
+are_inverses1 = True
+are_inverses2 = True
+are_inverses3 = False
+are_inverses4 = False
 

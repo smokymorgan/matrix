@@ -14,35 +14,46 @@ def setitem(M, k, val):
 def add(A, B):
     "Returns the sum of A and B"
     assert A.D == B.D
-    pass
+    return Mat(A.D, {(x,y): A[(x,y)]+B[(x,y)] for x in A.D[0] for y in A.D[1]})
+
 
 def scalar_mul(M, alpha):
     "Returns the product of scalar alpha with M" 
-    pass
+    return Mat(M.D, {(x,y): alpha*M[(x,y)] for x in M.D[0] for y in M.D[1]})
 
 def equal(A, B):
     "Returns true iff A is equal to B"
     assert A.D == B.D
-    pass
+    truth_list= [A[(x,y)]==B[(x,y)] for x in A.D[0] for y in A.D[1]]
+    for x in truth_list:
+        if x == False: return False
+    return True
 
 def transpose(M):
     "Returns the transpose of M"
-    pass
+    new_dict= {(y, x): M[(x,y)] for x in M.D[0] for y in M.D[1]}
+    return Mat((M.D[1],M.D[0]), new_dict)
 
 def vector_matrix_mul(v, M):
     "Returns the product of vector v and matrix M"
     assert M.D[0] == v.D
-    pass
+    vm= {col:Vec(M.D[0], {row:M[row,col] for row in M.D[0]}) for col in M.D[1]}
+    nvm= {c: vm[c] * v for c in vm.keys()}
+    return Vec(set(nvm.keys()),nvm)
 
 def matrix_vector_mul(M, v):
     "Returns the product of matrix M and vector v"
     assert M.D[1] == v.D
-    pass
+    vm= {row:Vec(M.D[1], {col:M[row,col] for col in M.D[1]}) for row in M.D[0]}
+    nvm= {r: vm[r] * v for r in vm.keys()}
+    return Vec(set(nvm.keys()),nvm)
 
 def matrix_matrix_mul(A, B):
     "Returns the product of A and B"
     assert A.D[1] == B.D[0]
-    pass
+    rd= {row:Vec(A.D[1], {col:A[row,col] for col in A.D[1]}) for row in A.D[0]}
+    cd= {col:Vec(B.D[0], {row:B[row,col] for row in B.D[0]}) for col in B.D[1]}
+    return Mat((A.D[0], B.D[1]), {(r,c):rd[r]*cd[c] for r in A.D[0] for c in B.D[1]})
 
 ################################################################################
 
