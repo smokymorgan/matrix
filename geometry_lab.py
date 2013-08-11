@@ -1,6 +1,6 @@
 from mat import Mat
 import math
-
+import matutil
 ## Task 1
 def identity(labels = {'x','y','u'}):
     '''
@@ -12,7 +12,9 @@ def identity(labels = {'x','y','u'}):
     identity().  Additionally, if you want {'r','g','b'}, or another set, to be the
     labels of your matrix, you can call identity({'r','g','b'}).  
     '''
-    pass
+    return matutil.identity(labels, 1)
+    #return Mat({labels, labels}, {(l,l):1 for l in labels})
+
 
 ## Task 2
 def translation(x,y):
@@ -20,7 +22,10 @@ def translation(x,y):
     Input:  An x and y value by which to translate an image.
     Output:  Corresponding 3x3 translation matrix.
     '''
-    pass
+    translator= identity()
+    translator[('x','u')]= x
+    translator[('y','u')]= y
+    return translator
 
 ## Task 3
 def scale(a, b):
@@ -28,7 +33,10 @@ def scale(a, b):
     Input:  Scaling parameters for the x and y direction.
     Output:  Corresponding 3x3 scaling matrix.
     '''
-    pass
+    scaler= identity()
+    scaler[('x', 'x')]= a
+    scaler[('y', 'y')]= b
+    return scaler
 
 ## Task 4
 def rotation(angle):
@@ -55,7 +63,9 @@ def reflect_y():
     Input:  None.
     Output:  3x3 Y-reflection matrix.
     '''
-    pass
+    reflect= identity()
+    reflect[('x', 'x')]= -1
+    return reflect
 
 ## Task 7
 def reflect_x():
@@ -63,7 +73,9 @@ def reflect_x():
     Inpute:  None.
     Output:  3x3 X-reflection matrix.
     '''
-    pass
+    reflect= identity()
+    reflect[('y', 'y')]= -1
+    return reflect
     
 ## Task 8    
 def scale_color(scale_r,scale_g,scale_b):
@@ -71,7 +83,12 @@ def scale_color(scale_r,scale_g,scale_b):
     Input:  3 scaling parameters for the colors of the image.
     Output:  Corresponding 3x3 color scaling matrix.
     '''
-    pass
+    scolor= identity({'r', 'g', 'b'})
+    scolor[('r','r')]= scale_r
+    scolor[('g','g')]= scale_g
+    scolor[('b','b')]= scale_b
+    return scolor
+
 
 ## Task 9
 def grayscale():
