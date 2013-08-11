@@ -45,7 +45,12 @@ def rotation(angle):
     Output:  Corresponding 3x3 rotation matrix.
     Note that the math module is imported.
     '''
-    pass
+    rotator= identity()
+    rotator[('x','x')]= math.cos(angle)
+    rotator[('x','y')]= -math.sin(angle)
+    rotator[('y','x')]= math.sin(angle)
+    rotator[('y','y')]= math.cos(angle)
+    return rotator
 
 ## Task 5
 def rotate_about(x,y,angle):
@@ -55,7 +60,7 @@ def rotate_about(x,y,angle):
     Output:  Corresponding 3x3 rotation matrix.
     It might be helpful to use procedures you already wrote.
     '''
-    pass
+    return translation(x,y)* rotation(angle)* translation(-x,-y)
 
 ## Task 6
 def reflect_y():
@@ -96,7 +101,14 @@ def grayscale():
     Input: None
     Output: 3x3 greyscale matrix.
     '''
-    pass   
+    gray_matrix= scale_color(77/256, 151/256, 28/256)
+    gray_matrix[('b','r')]= gray_matrix[('g','r')]= gray_matrix['r','r']
+    gray_matrix[('b','g')]= gray_matrix[('r','g')]= gray_matrix['g','g']
+    gray_matrix[('r','b')]= gray_matrix[('g','b')]= gray_matrix['b','b']
+
+
+    return gray_matrix
+
 
 ## Task 10
 def reflect_about(p1,p2):
