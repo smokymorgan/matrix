@@ -234,6 +234,8 @@ def is_independent(L):
     >>> is_independent(vlist[5:])
     True
     '''
+    if len(L) < 2:
+        return True
     return not any([is_superfluous(L,i) for i in range(len(L))])
 
 
@@ -255,11 +257,18 @@ def superset_basis(S, L):
         >>> superset_basis([a0, a3], [a0, a1, a2]) == [Vec({'a', 'c', 'b', 'd'},{'a': 1}), Vec({'a', 'c', 'b', 'd'},{'b':1}),Vec({'a', 'c', 'b', 'd'},{'c': 1})]
         True
     '''
-    pass
-
+    # Add vectors until it's linearly independent S first,
+    all_vectors= S+L 
+    T= []
+    for v in all_vectors:
+        T.append(v)
+        if is_superfluous(T, len(T)-1):
+            T.pop()
+    return T
 
 
 ## Problem 18
+from vecutil import list2vec
 def exchange(S, A, z):
     '''
     Input:
@@ -274,5 +283,10 @@ def exchange(S, A, z):
         >>> exchange(S, A, z) == Vec({0, 1, 2, 3},{0: 0, 1: 0, 2: 1, 3: 0})
         True
     '''
-    pass
+    SminusA = [vec for vec in S if vec not in A]
+    u= vec2rep(S,z)
+    for (s, u_alpha) in zip(S,u): 
+        if s in SminusA and u_alpha > 1e-14:
+            return s
+    
 
